@@ -7,6 +7,7 @@ import br.com.devdojo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -40,6 +41,7 @@ public class StudentEndpoint {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<?> saveStudent(@RequestBody Student student) {
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
     }
@@ -52,6 +54,7 @@ public class StudentEndpoint {
     }
 
     @PutMapping
+    @Transactional
     public ResponseEntity<?> updateStudent(@RequestBody Student student) {
         verifyIfStudentExists(student.getId());
         studentDAO.save(student);
