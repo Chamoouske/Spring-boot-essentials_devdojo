@@ -4,6 +4,7 @@ import br.com.devdojo.error.CustomErrorType;
 import br.com.devdojo.error.ResourceNotFoundException;
 import br.com.devdojo.model.Student;
 import br.com.devdojo.repository.StudentRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class StudentEndpoint {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> saveStudent(@RequestBody Student student) {
+    public ResponseEntity<?> saveStudent(@Valid @RequestBody Student student) {
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
     }
 
